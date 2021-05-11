@@ -37,7 +37,7 @@ public class ExampleCommand() {
     
 //Sub command:
    
-   @SubCommand(label "test", parent = "example", permission = "command.example")
+   @SubCommand(label = "test", parent = "example", permission = "command.example")
    public void executeSubCommand(CommandSender sender) {
      sender.sendMessage("Sub command");  
    }
