@@ -31,7 +31,7 @@ public class CustomCommand extends Command {
 
         io.github.scifi9902.command.annotations.Command command = commandData.getCommand();
 
-        if (command.aliases().length != 0) {
+        if (command.aliases().length > 0) {
             this.setAliases(Arrays.asList(command.aliases()));
         }
 
@@ -96,9 +96,9 @@ public class CustomCommand extends Command {
 
             if (args.length < rangedCopy.length) {
                 if (subCommand == null) {
-                    commandSender.sendMessage(ChatColor.RED + "Usage: /" + this.getLabel() + " " + Arrays.stream(rangedCopy).map(parameter -> "<" + "arg" + ">").collect(Collectors.joining(" ")));
+                    commandSender.sendMessage(ChatColor.RED + "Usage: /" + this.getLabel() + " " + Arrays.stream(rangedCopy).map(parameter -> "<" + (parameter.isAnnotationPresent(io.github.scifi9902.command.annotations.Parameter.class) ? parameter.getAnnotation(io.github.scifi9902.command.annotations.Parameter.class).name() : "arg") + ">").collect(Collectors.joining(" ")));
                 } else {
-                    commandSender.sendMessage(ChatColor.RED + "Usage: /" + this.getLabel() + " " + subCommand.getSubCommand().name() + " " + Arrays.stream(rangedCopy).map(str -> "<" + "arg" + ">").collect(Collectors.joining(" ")));
+                    commandSender.sendMessage(ChatColor.RED + "Usage: /" + this.getLabel() + " " + subCommand.getSubCommand().name() + " " + Arrays.stream(rangedCopy).map(parameter -> "<" + (parameter.isAnnotationPresent(io.github.scifi9902.command.annotations.Parameter.class) ? parameter.getAnnotation(io.github.scifi9902.command.annotations.Parameter.class).name() : "arg") + ">").collect(Collectors.joining(" ")));
                 }
                 return true;
             }
