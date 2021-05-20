@@ -85,6 +85,7 @@ public class CustomCommand extends Command {
 
         if (!permission.isEmpty() && !commandSender.hasPermission(permission)) {
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNo permission."));
+            return true;
         }
 
         if (parameters.length >= 1 && !parameters[0].getType().isArray()) {
