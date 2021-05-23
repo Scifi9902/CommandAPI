@@ -92,8 +92,6 @@ public class CustomCommand extends Command {
             Parameter[] rangedCopy = Arrays.copyOfRange(parameters, 1, parameters.length);
             Object[] objects = new Object[rangedCopy.length];
 
-            System.out.println(Arrays.toString(args));
-
             if (args.length < rangedCopy.length) {
                 if (subCommand == null) {
                     commandSender.sendMessage(ChatColor.RED + "Usage: /" + this.getLabel() + " " + Arrays.stream(rangedCopy).map(parameter -> "<" + (parameter.isAnnotationPresent(io.github.scifi9902.command.annotations.Parameter.class) ? parameter.getAnnotation(io.github.scifi9902.command.annotations.Parameter.class).name() : "arg") + ">").collect(Collectors.joining(" ")));
@@ -106,8 +104,6 @@ public class CustomCommand extends Command {
             for (int i = 0; i < rangedCopy.length; i++) {
 
                 Parameter parameter = rangedCopy[i];
-
-                System.out.println(args[i]);
 
                 IConverter<?> converter = this.commandHandler.getConverter(parameter.getType());
 
