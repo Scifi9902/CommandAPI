@@ -101,17 +101,30 @@ public class CustomCommand extends Command {
                 return true;
             }
 
+            StringBuilder stringBuilder = new StringBuilder();
+
             for (int i = 0; i < rangedCopy.length; i++) {
 
                 Parameter parameter = rangedCopy[i];
+                Object obj = null;
 
                 IConverter<?> converter = this.commandHandler.getConverter(parameter.getType());
 
-                if (converter == null) {
-                    throw new IllegalArgumentException("Unable to find converter for " + parameter.getType().getName());
+                if ((parameters.length == i + 1) && parameters[parameters.length - 1].getType().equals(String.class) && args.length >= i && commandData.getCommand().appendStrings()) {
+                    String[] appendArgs = Arrays.copyOfRange(args,i, args.length);
+                    for (String append : appendArgs) {
+                        stringBuilder.append(append).append(" ");
+                    }
                 }
+                else {
 
-                objects[i] = converter.getFromString(commandSender, args[i]);
+                    if (converter == null) {
+                        throw new IllegalArgumentException("Unable to find converter for " + parameter.getType().getName());
+                    }
+
+                    obj = converter.getFromString(commandSender, args[i]);
+                }
+                objects[i] = stringBuilder.toString().isEmpty() ? obj : stringBuilder.toString();
             }
 
             objects = ArrayUtils.add(objects, 0, parameters[0].getType().cast(commandSender));
