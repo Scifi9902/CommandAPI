@@ -110,7 +110,7 @@ public class CustomCommand extends Command {
 
                 IConverter<?> converter = this.commandHandler.getConverter(parameter.getType());
 
-                if ((parameters.length == i + 1) && parameters[parameters.length - 1].getType().equals(String.class) && args.length >= i && commandData.getCommand().appendStrings()) {
+                if ((rangedCopy.length == i + 1) && rangedCopy[rangedCopy.length - 1].getType().equals(String.class) && args.length >= i && commandData.getCommand().appendStrings()) {
                     String[] appendArgs = Arrays.copyOfRange(args,i, args.length);
                     for (String append : appendArgs) {
                         stringBuilder.append(append).append(" ");
