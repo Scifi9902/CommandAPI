@@ -121,8 +121,12 @@ public class CustomCommand extends Command {
                     if (converter == null) {
                         throw new IllegalArgumentException("Unable to find converter for " + parameter.getType().getName());
                     }
-
-                    obj = converter.getFromString(commandSender, args[i]);
+                    
+                        if (parameter.isAnnotationPresent(Optional.class)) {
+                            obj = converter.getFromString(commandSender, parameter.getAnnotation(Optional.class).value().replace("self", commandSender.getName()));
+                        } else {
+                            obj = converter.getFromString(commandSender, args[i]);
+                        }
                 }
                 objects[i] = stringBuilder.toString().isEmpty() ? obj : stringBuilder.toString();
             }
