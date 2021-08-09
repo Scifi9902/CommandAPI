@@ -123,7 +123,7 @@ public class CustomCommand extends Command {
                     }
                     
                         if (parameter.isAnnotationPresent(io.github.scifi9902.command.annotations.Optional.class)) {
-                            obj = converter.getFromString(commandSender, parameter.getAnnotation(Optional.class).value().replace("self", commandSender.getName()));
+                            obj = converter.getFromString(commandSender, parameter.getAnnotation(io.github.scifi9902.command.annotations.Optional.class).value().replace("self", commandSender.getName()));
                         } else {
                             obj = converter.getFromString(commandSender, args[i]);
                         }
