@@ -122,7 +122,7 @@ public class CustomCommand extends Command {
                         throw new IllegalArgumentException("Unable to find converter for " + parameter.getType().getName());
                     }
                     
-                        if (parameter.isAnnotationPresent(Optional.class)) {
+                        if (parameter.isAnnotationPresent(io.github.scifi9902.command.annotations.Optional.class)) {
                             obj = converter.getFromString(commandSender, parameter.getAnnotation(Optional.class).value().replace("self", commandSender.getName()));
                         } else {
                             obj = converter.getFromString(commandSender, args[i]);
